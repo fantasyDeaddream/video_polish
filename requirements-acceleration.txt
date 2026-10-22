@@ -1,0 +1,8 @@
+# Optional, project-local install: python scripts/runner.py scripts/setup_acceleration.py
+# NVIDIA publishes the large libs wheel on https://pypi.nvidia.com/.
+tensorrt-cu12==10.10.0.31
+tensorrt-cu12-bindings==10.10.0.31
+tensorrt-cu12-libs==10.10.0.31
+nvidia-cuda-runtime-cu12==12.8.90
+onnx==1.17.0
+protobuf==5.29.5

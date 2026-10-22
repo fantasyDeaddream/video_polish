@@ -1,0 +1,66 @@
+[
+  {
+    "path": "RealESRGAN_x2plus.pth",
+    "family": "rrdb",
+    "bytes": 67061725,
+    "sha256": "49fafd45f8fd7aa8d31ab2a22d14d91b536c34494a5cfe31eb5d89c2fa266abb",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.1/RealESRGAN_x2plus.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "RealESRGAN_x4plus.pth",
+    "family": "rrdb",
+    "bytes": 67040989,
+    "sha256": "4fa0d38905f75ac06eb49a7951b426670021be3018265fd191d2125df9d682f1",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "RealESRGAN_x4plus_anime_6B.pth",
+    "family": "rrdb",
+    "bytes": 17938799,
+    "sha256": "f872d837d3c90ed2e05227bed711af5671a6fd1c9f7d7e91c911a61f155e99da",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "realesr-general-x4v3.pth",
+    "family": "srvgg",
+    "bytes": 4885111,
+    "sha256": "8dc7edb9ac80ccdc30c3a5dca6616509367f05fbc184ad95b731f05bece96292",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "realesr-general-wdn-x4v3.pth",
+    "family": "srvgg",
+    "bytes": 4885111,
+    "sha256": "1641f8c4464b9f097c9fdda5589273713f67cf59f3d909e0bd688f0cee269dca",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-wdn-x4v3.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "realesr-animevideov3.pth",
+    "family": "srvgg",
+    "bytes": 2504012,
+    "sha256": "b8a8376811077954d82ca3fcf476f1ac3da3e8a68a4f4d71363008000a18b75d",
+    "source": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-animevideov3.pth",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "path": "rife/4.25/flownet.pkl",
+    "family": "rife",
+    "bytes": 24636301,
+    "sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+    "source": "https://drive.google.com/file/d/1ZKjcbmt1hypiFprJPIKW0Tt0lr_2i7bg/view",
+    "license": "MIT"
+  },
+  {
+    "path": "rife/4.25.lite/flownet.pkl",
+    "family": "rife",
+    "bytes": 24467405,
+    "sha256": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+    "source": "https://drive.google.com/file/d/1zlKblGuKNatulJNFf5jdB-emp9AqGK05/view",
+    "license": "MIT"
+  }
+]

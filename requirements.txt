@@ -1,0 +1,8 @@
+# Reuse existing packages. Install missing dependencies only into .deps/<platform>-<python>/.
+torch>=2.1
+numpy>=1.24
+opencv-python-headless>=4.9
+fastapi>=0.110
+uvicorn>=0.27
+python-multipart>=0.0.9
+av==16.1.0

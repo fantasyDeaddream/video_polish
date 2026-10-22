@@ -1,0 +1,44 @@
+[
+  {
+    "model": "4.25",
+    "source": "https://drive.usercontent.google.com/download?id=1ZKjcbmt1hypiFprJPIKW0Tt0lr_2i7bg&export=download&confirm=t",
+    "archive_sha256": "e63d481b7ae5d4a4e6ad7ac5b410ff78f3bf7be3b51b2e38ca8152747abde5b4",
+    "members": {
+      "flownet.pkl": {
+        "sha256": "6615790efd627772917205db291f51cd392528a157ecbb2ecaeec3bff8eb6de2",
+        "bytes": 24636301
+      },
+      "IFNet_HDv3.py": {
+        "sha256": "655b4c772b037967b86c2dd31c8fa3b5323b79dd9a0e0088708d89149bbc8a32",
+        "bytes": 6433
+      },
+      "RIFE_HDv3.py": {
+        "sha256": "81bbd0648e499de79e44768d284005d9d57d0f6eb7c30adae407f22675055730",
+        "bytes": 3101
+      }
+    },
+    "license": "MIT",
+    "pin_origin": "official archive retrieved 2026-10-21"
+  },
+  {
+    "model": "4.25.lite",
+    "source": "https://drive.usercontent.google.com/download?id=1zlKblGuKNatulJNFf5jdB-emp9AqGK05&export=download&confirm=t",
+    "archive_sha256": "e84366c23e0eb1a637a55aad2e4f3442ec2bf4c388043b4aabbf590be289e6e8",
+    "members": {
+      "flownet.pkl": {
+        "sha256": "81cdba223fe72a120130cc8552e5d2ecac824259d406f0c15323b3decf96b8b1",
+        "bytes": 24467405
+      },
+      "IFNet_HDv3.py": {
+        "sha256": "ea5eb5f05a391a2ac26402b16acf9fdb91968f299373f9be24aa4a8c5483d3d3",
+        "bytes": 6433
+      },
+      "RIFE_HDv3.py": {
+        "sha256": "7b7b1ed62b3d14ab5a130b397f928d6c4d7f95edb03def1190d2a655a20ad886",
+        "bytes": 3102
+      }
+    },
+    "license": "MIT",
+    "pin_origin": "official archive retrieved 2026-10-21"
+  }
+]

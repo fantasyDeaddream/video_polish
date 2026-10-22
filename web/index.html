@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VideoPolish · 视频超分与插帧</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <header><a class="brand" href="/"><img src="/favicon.svg" width="34" height="34" alt=""><span>Video<span class="brand-light">Polish</span></span></a><div class="header-right"><span id="health" class="health"><i></i>连接服务中</span><a href="/docs" target="_blank" rel="noopener">API 文档 ↗</a></div></header>
+  <main>
+    <section class="intro"><div><div class="eyebrow">LOCAL VIDEO RESTORATION</div><h1>让每一帧，<span>清楚一点。</span></h1><p>提升清晰度，也让运动更流畅。保留原始比例与播放时长。</p></div><div class="local-note"><span class="lock-icon">⌂</span><div>在你的电脑上处理<small>文件不上传至云端</small></div></div></section>
+    <div class="workspace">
+      <section class="source-panel panel">
+        <div class="panel-heading"><h2><span class="step">01</span>添加视频</h2><span class="muted">一次最多 32 份</span></div>
+        <label id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="选择或拖入视频"><input id="files" type="file" accept="video/*,.mkv,.avi,.mts,.m2ts,.ts" multiple hidden><div class="upload-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 21V6m-6 6 6-6 6 6M6 22v4h20v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><strong>将视频拖到这里</strong><span>或 <b>浏览本地文件</b></span><small>MP4 / MOV / MKV / AVI / WebM 等可解码格式</small></label>
+        <div id="upload-progress" class="upload-progress" hidden><progress max="100" value="0"></progress><span></span></div>
+        <div id="source-empty" class="empty-hint"><span>◎</span><div>先看清原片，再决定输出<small>读入后显示每份视频的分辨率、时长和帧率</small></div></div>
+        <div id="source-list" class="source-list"></div>
+        <div id="source-footer" class="source-footer" hidden><span id="source-count"></span><button id="clear-source" class="text-button">移除本批次</button></div>
+        <div class="workflow"><span><b>1</b>读取原片</span><em>→</em><span><b>2</b>统一设置</span><em>→</em><span><b>3</b>另存结果</span></div>
+      </section>
+      <section class="settings-panel panel">
+        <div class="panel-heading"><h2><span class="step">02</span>输出设置</h2><span class="tag">保持比例</span></div>
+        <label class="field-label" for="workflow">处理流程</label><select id="workflow"><option value="upscale">仅超分 · 提升清晰度</option><option value="interpolate">仅插帧 · 提升流畅度</option><option value="combined">超分并插帧 · 清晰且流畅</option></select>
+        <div id="interpolation-settings" class="acceleration-box" hidden>
+          <div class="acceleration-title"><strong>AI 视频插帧</strong><span id="rife-status" class="tag">检测中</span></div>
+          <label class="field-label" for="rife-model">插帧模型</label><select id="rife-model"><option value="rife-4.25">RIFE 4.25 · 标准</option><option value="rife-4.25-lite">RIFE 4.25.lite · 快速</option></select>
+          <label class="field-label" for="target-fps">目标帧率</label><select id="target-fps"><option value="2x">原帧率 × 2</option><option value="4x">原帧率 × 4</option><option value="48">48 fps</option><option value="50">50 fps</option><option value="60">60 fps</option><option value="120">120 fps</option><option value="custom">自定义</option></select>
+          <label id="custom-fps-label" class="field-label" hidden>目标 fps<input id="custom-fps" type="text" value="60000/1001" maxlength="24" placeholder="如 60 或 60000/1001" aria-label="自定义帧率"></label>
+          <div class="advanced-grid"><label>插帧后端<select id="rife-backend"><option value="pytorch">PyTorch</option><option value="tensorrt">TensorRT 编译加速</option></select></label><label>插帧计算精度<select id="rife-precision"><option value="fp16">FP16 · 速度优先</option><option value="fp32">FP32 · 精度优先</option></select></label></div>
+          <details><summary>插帧高级设置</summary><label class="field-label">运动估计内部尺度<select id="rife-scale"><option value="1">1.0 · 完整尺度</option><option value="0.5">0.5 · 较低显存</option><option value="0.25">0.25 · 更低显存</option></select></label><p class="field-hint">较小尺度可能改变运动细节；输出尺寸保持不变。</p><label class="pipeline-option"><input id="scene-cuts" type="checkbox" checked>检测切镜，避免跨镜头生成混合帧</label></details>
+          <p id="rife-hint" class="field-hint">保持时长和音轨。超分并插帧时，先增强原始帧，再生成中间帧。快速运动、遮挡和字幕可能出现伪影。</p>
+        </div>
+        <div id="sr-settings">
+        <fieldset><legend>目标分辨率</legend><div class="presets" id="presets" role="radiogroup" aria-label="目标分辨率">
+          <button type="button" data-preset="720p" role="radio" aria-checked="false">720P</button><button type="button" data-preset="1080p" class="selected" role="radio" aria-checked="true">1080P</button><button type="button" data-preset="2k" role="radio" aria-checked="false">2K</button><button type="button" data-preset="4k" role="radio" aria-checked="false">4K</button><button type="button" data-preset="custom" role="radio" aria-checked="false">自定义</button>
+        </div><p id="target-hint" class="field-hint">短边 1080 px · 自动计算另一条边</p>
+        <div id="custom-target" class="custom-target" hidden><label>基准边<select id="custom-edge"><option value="short">短边</option><option value="long">长边</option></select></label><label>目标像素<div class="input-suffix"><input id="custom-pixels" type="number" min="16" max="7680" step="1" value="1440"><span>px</span></div></label></div></fieldset>
+        <label class="field-label" for="model">超分模型</label><select id="model"><option value="auto">自然增强 · Real-ESRGAN 自动倍率</option><option value="quality">写实细节 · Real-ESRGAN</option><option value="general-fast">通用轻量 · SRVGG x4v3</option><option value="general-clean">通用轻量 · WDN 弱降噪</option><option value="anime">动漫线条 · RRDB 6B</option><option value="anime-fast">动漫视频轻量 · AnimeVideo v3</option><option value="lanczos">快速缩放 · Lanczos（无 AI）</option></select>
+        <p id="model-hint" class="field-hint">按原生倍率超分后再缩放到目标尺寸，保留原始输入细节。</p>
+        <div class="acceleration-box"><div class="acceleration-title"><label for="tensorrt"><input id="tensorrt" type="checkbox">启用 TensorRT 编译加速</label><span id="trt-status" class="tag">检测中</span></div><p id="trt-hint" class="field-hint">首次编译后缓存复用；启用后会检查与 PyTorch 的数值差异。</p><label id="trt-precision-label" hidden>计算精度<select id="trt-precision"><option value="fp16">FP16 · 速度优先</option><option value="fp32">FP32 · 更高计算精度</option></select></label></div>
+        <div class="range-row"><label for="strength">细节增强</label><output id="strength-value">75%</output></div><input id="strength" type="range" min="10" max="100" value="75"><div class="range-ends"><span>克制自然</span><span>更多重建细节</span></div>
+        <div class="range-row"><label for="temporal">帧间稳定</label><output id="temporal-value">40%</output></div><input id="temporal" type="range" min="0" max="65" value="40"><p class="field-hint">光流对齐增强细节，减少闪烁；插帧前稳定原始帧。</p>
+        </div>
+        <details class="advanced"><summary>编码与高级设置</summary><div class="advanced-grid"><label>编码质量 CRF<select id="crf"><option value="16">16 · 更高质量</option><option value="18" selected>18 · 推荐</option><option value="23">23 · 更小体积</option><option value="28">28 · 节省空间</option></select></label><label>推理分块<select id="tile"><option value="128">128 · 低显存</option><option value="256" selected>256 · 原默认</option><option value="384">384</option><option value="512">512</option><option value="768">768</option><option value="1024">1024</option><option value="1536">1536</option><option value="2048">2048 · 最大</option></select></label></div><label class="pipeline-option" for="pipeline"><input id="pipeline" type="checkbox" checked>并行解码与编码管线</label><p class="field-hint">显存不足自动缩小分块并记住本次视频的可用值。<br>H.264 / MP4 · 原时间戳 · 保留音轨 · 不裁切</p></details>
+        <button id="start" class="primary-button" disabled><span>开始处理</span><span aria-hidden="true">↗</span></button><p class="settings-note">停止服务会清空缓存，请先将需要的结果另存。<br>AI 重建可能改变纹理，建议先用短片检查效果。</p>
+      </section>
+    </div>
+    <section class="results-section"><div class="section-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>处理队列与结果 <span id="jobs-count">0</span></h2></div><button id="save-all" class="secondary-button" hidden>批量另存到文件夹 ↗</button></div><div id="jobs-empty" class="jobs-empty">还没有处理任务。添加视频，开始第一份清晰度提升。</div><div id="jobs"></div></section>
+  </main>
+  <footer><span>VideoPolish <span class="footer-dot">/</span> 每一帧，都值得认真对待。</span><span>本地处理 · Real-ESRGAN + RIFE</span></footer>
+</div><div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
